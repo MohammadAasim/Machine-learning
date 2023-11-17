@@ -1,0 +1,54 @@
+cd C:\hadoopsetup\hadoop-3.2.4\sbin
+.\start-all.cmd
+jps
+hadoop fs -ls
+hadoop fs -mkdir /lpu
+hadoop fs -ls /
+hadoop dfs -touchz /lpu/file123.txt
+hadoop fs -ls -R /
+hadoop fs -put localfile1.txt /lpu
+hadoop fs -ls -R /lpu
+hadoop fs -copyFromLocal localfile1.txt /zxcv
+hadoop fs -ls -R /zxcv
+hadoop fs -get localfile1.txt /lpu
+hadoop fs -get /lpu/localfile1.txt C:\HadoopSetup\hadoop-3.2.4\sbin
+
+hadoop fs -mkdir /student
+hadoop fs -mkdir /student/hostel
+hadoop fs -mkdir /lpu
+hadoop fs -cp /lpu /student/hostel
+hadoop dfs -touchz /lpu/localfile.txt
+
+
+//Append in File
+hadoop fs -mkdir /students
+hadoop fs -touchz /students/studentinfo.txt
+hadoop fs -appendToFile -  /students/studentinfo.txt
+Ctrl+c
+hadoop fs -cat  /students/studentinfo.txt
+hadoop fs -appendToFile E:\BigData\studentinfo.txt  /students/studentinfo.txt
+hadoop fs -cat  /students/studentinfo.txt
+
+//change group
+hadoop fs -lsr /lpu
+fs -chgrp mygroup /lpu
+
+//Permission
+1.Exceution
+2.Write
+3.Write/Execute
+4.Read
+5.Read/Execute
+6.Read/Write
+7.Read/Write/Execute
+user group other
+rwx  r-x   r--
+7    5     4
+hadoop fs -ls /
+
+//word count
+hadoop fs -mkdir /apple
+hadoop fs -put E:\BigData\wordcount.txt /apple
+hadoop fs -ls /apple
+hadoop jar C:\HadoopSetup\hadoop-3.2.4\share\hadoop\mapreduce\hadoop-mapreduce-examples-3.2.4.jar  wordcount /apple /outputdir
+

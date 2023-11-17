@@ -1,0 +1,26 @@
+cd C:\hadoopsetup\hadoop-3.2.4\sbin
+.\start-all.cmd
+jps
+
+cd C:\hive\apache-hive-3.1.2-bin\apache-hive-3.1.2-bin\bin
+hive
+
+create database company;
+show databases;
+
+create table employee (id int,name string,salary int,department string);
+
+insert into employee values
+   (1, 'A', 100000, 'Engineering'),
+   (2, 'B', 120000, 'Marketing'),
+   (3, 'C', 150000, 'Sales'),
+   (4, 'D', 180000, 'Technical'),
+   (5, 'E', 200000, 'Finance'),
+   (6, 'F', 250000, 'Legal'),
+   (7, 'G', 300000, 'HR');
+
+select * from employee;
+
+select department, AVG(salary) as avg_salary
+from employee
+group by department;
