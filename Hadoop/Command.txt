@@ -1,0 +1,3 @@
+hadoop fs -mkdir inputDirectory
+hadoop fs -put C:\Users\Aasim\Desktop\ODDEVEN\abcd.txt /inputDirectory
+

@@ -1,0 +1,4 @@
+Mapreduces is the process layer of hadoop
+
+MapReduces programming model is design for processing large volume of data in parallel by dividing the work into set of independent of task
+

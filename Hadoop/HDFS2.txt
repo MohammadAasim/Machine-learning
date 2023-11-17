@@ -1,0 +1,25 @@
+#MapReduces : map and reduce 
+map divide dataset into small chunks
+reduces take input as a map then do process agregation and give final output
+
+#Job
+this is the actual work that needs to executed or processed
+
+#Task
+this is a piece of the actual work thar needs to be execute or processed
+
+#Job Tracker
+job tracker plays the roleof Scheduling jobs and tracking all jobs assign
+
+#Task Tracker
+Tracking the tasks and reporting the status of task
+
+#Input 
+data used to process in the mapping phase
+
+#Output
+result of mapping and reducing
+
+#Hadoops MapReduces Master
+play roles of diving jobs in job-parts
+

@@ -1,0 +1,113 @@
+cd C:\hadoopsetup\hadoop-3.2.4\sbin
+.\start-all.cmd
+jps
+Note -> hadoop fs (here fs is any file system local ,distrubed etc)
+Note -> hdfs dfs (here we talking hadoop distributed file system) 
+hadoop fs -ls
+#create directory
+hadoop fs -mkdir /aasim
+
+#check create or not
+hadoop fs -ls /
+
+#create file
+hadoop fs -touchz /ap.txt
+hadoop fs -ls /
+
+#copy from local file system to hdfs
+New-Item C:\Users\Aasim\file.txt
+hdfs dfs -copyFromLocal C:\Users\Aasim\file.txt  /aasim
+hadoop fs -ls /aasim
+hadoop fs -cat /aasim/file.txt
+
+#copy to Local file system from hdfs
+hdfs dfs -copyToLocal aasim/file.txt C:\Users\Aasim\Desktop\
+
+#copy hdfs to hdfs
+hadoop fs -mkdir /aasim1
+hadoop fs -cp /aasim/file.txt /aasim1/
+hdfs dfs -ls /aasim1
+hdoop fs -cat /aasim1/file.txt
+
+#move
+hadoop fs -mkdir /aasim1
+hadoop fs -mv /aasim/file.txt /aasim2/
+hdfs dfs -ls /aasim2
+hadoop fs -cat /aasim2/file.txt
+hdfs dfs -ls /aasim
+
+
+#Disk Used(Display Each or every file storage)
+hadoop fs -du /aasim1
+
+#Total Disk used
+hadoop fs -du -s /aasim1
+
+#Directory or File
+hadoop fs -mkdir /destination
+hadoop fs -test -d destination
+echo $? (False -> Directory)
+#Destination exist or Not
+hadoop fs -test -e destination 
+echo $? (False -> Directory Exit)
+#Directory or File
+hadoop fs -test -f destination
+echo $? (True -> File)
+#Content File
+hadoop fs -test -z destination/xyz.txt
+
+#Move local to hdfs
+New-Item C:\Users\Aasim\file1.txt
+hdfs dfs -moveFromLocal C:\Users\Aasim\file1.txt  /destination
+hadoop fs -cat /destination/file1.txt
+
+#Get Merge
+hadoop fs -touchz /destination/abc.txt
+echo "Hello Big Data" | hadoop fs -appendToFile - /destination/abc.txt
+hadoop fs -cat /destination/abc.txt
+hadoop fs -touchz /destination/abc1.txt
+echo "Hello Hadoop Hive Hbase Pig" | hadoop fs -appendToFile - /destination/abc1.txt
+hadoop fs -cat /destination/abc1.txt
+hadoop fs -getmerge -nl /destination/abc.txt /destination/abc1.txt /aasim/result.txt
+hadoop fs -cat /aasim/result.txt
+
+#Append to  File
+hadoop fs -touchz /q3.txt
+hadoop fs -appendToFile C:\Users\Aasim\q1.txt C:\Users\Aasim\q2.txt q3.txt
+hadoop fs -cat q3.txt
+
+#check some
+hadoop fs -checksum /destination/file1.txt
+
+#Hadoop Status
+hadoop fsck - /
+
+#Count file in Directory
+hadoop fs -count  /destination
+
+#Remove file
+hadoop fs -rm  /destination/xyz.txt
+
+#Change Group name
+hadoop fs -ls  /destination
+hadoop fs -chgrp MyGroup /destination/abc.txt
+
+#size of file
+hadoop fs -stat %b /destination/file1.txt
+%b for size
+%g for group
+%r for factor
+%u for user
+%y for time
+
+#Usage
+hadoop fs -usage mkdir
+
+#Manual Page
+hadoop -help cat
+
+
+#Word Count
+hadoop fs -mkdir dir1
+hadoop fs -put C:\Users\Aasim\Desktop\BJ.txt dir1
+hadoop jar C:\HadoopSetup\hadoop-3.2.4\share\hadoop\mapreduce\hadoop-mapreduce-examples-3.2.4.jar wordcount dir1 outputdir1

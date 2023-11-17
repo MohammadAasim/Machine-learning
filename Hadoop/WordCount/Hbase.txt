@@ -1,0 +1,5 @@
+hdfs dfsadmin -safemode leave
+cd C:\hbase\hbase-1.4.9-bin\bin
+.\start-hbase.cmd
+hbase shell
+status
